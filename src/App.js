@@ -10,6 +10,11 @@ function App() {
     { vrsta: "Curka", ime: "Gabl", datumRodjenja: new Date("01/06/2018") },
   ]);
 
+  const [vrsta, setVrsta] = useState('')
+  const [ime, setIme] = useState('')
+  const [datumRodjenja, setDatumRodjenja] = useState('')
+
+
   const dateToString = (date) =>
     date ? date.toLocaleDateString() : "Nepoznat";
 
@@ -24,8 +29,48 @@ function App() {
     setAnimals([movableValue, ...newAnimals]);
   };
 
+  const addAnimal = (e) => {
+    e.preventDefault()
+    let {vrsta, ime, datumRodjenja} = e.target
+    const datumRodjenjaValue = datumRodjenja.value ? new Date(datumRodjenja.value) : "";
+    const newAnimal = {vrsta: vrsta.value, ime: ime.value, datumRodjenja: datumRodjenjaValue}
+    setAnimals([...animals, newAnimal])
+    setVrsta('')
+    setIme('')
+    setDatumRodjenja('')
+  }
+
   return (
     <div>
+      <form onSubmit={addAnimal}>
+
+        <div>
+          <label>
+            Vrsta:
+          </label>
+          <input type="text" id="vrsta" onChange={(e) => setVrsta(e.target.value)} value={vrsta}/>
+        </div>
+
+        <div>
+          <label>
+            Ime:
+          </label>
+          <input type="text" id="ime" onChange={(e) => setIme(e.target.value)} value={ime}/>
+        </div>
+
+        <div>
+          <label>
+            Datum rodjenja:
+          </label>
+          <input type="date" id="datumRodjenja" onChange={(e) => setDatumRodjenja(e.target.value)} value={datumRodjenja}/>
+        </div>
+
+        <div>
+          <button>Add Animal</button>
+        </div>
+
+      </form>
+
       <table>
         <thead>
           <tr>
