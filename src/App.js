@@ -18,6 +18,12 @@ function App() {
     setAnimals([...newAnimals]);
   };
 
+  const handleMove = (index) => {
+    const movableValue = animals[index]
+    const newAnimals = animals.filter((animal, i) => i !== index);
+    setAnimals([movableValue, ...newAnimals]);
+  };
+
   return (
     <div>
       <table>
@@ -35,8 +41,9 @@ function App() {
               <td>{animal.vrsta}</td>
               <td>{animal.ime}</td>
               <td>{dateToString(animal.datumRodjenja)}</td>
-              <td>
+              <td className='action-buttons'>
                 <button onClick={() => handleRemove(index)}>Remove</button>
+                <button onClick={() => handleMove(index)}>Move to top</button>
               </td>
             </tr>
           ))}
