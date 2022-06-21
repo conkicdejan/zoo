@@ -22,7 +22,7 @@ function App() {
 
   const handleRemove = (index) => {
     const newAnimals = animals.filter((animal, i) => i !== index);
-    setAnimals([...newAnimals]);
+    setAnimals(newAnimals);
   };
 
   const handleMove = (index) => {
@@ -33,15 +33,12 @@ function App() {
 
   const addAnimal = (e) => {
     e.preventDefault();
-    let { vrsta, ime, datumRodjenja, sektor } = e.target;
-    const datumRodjenjaValue = datumRodjenja.value
-      ? new Date(datumRodjenja.value)
-      : "";
+    const datumRodjenjaValue = datumRodjenja ? new Date(datumRodjenja) : "";
     const newAnimal = {
-      vrsta: vrsta.value,
-      ime: ime.value,
+      vrsta,
+      ime,
       datumRodjenja: datumRodjenjaValue,
-      sektor: sektor.value,
+      sektor,
     };
     setAnimals([...animals, newAnimal]);
     setVrsta("");
