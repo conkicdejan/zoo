@@ -11,11 +11,24 @@ function App() {
 
     return (
         <div>
-            <ul>
-                {animals.map((animal, index) => (
-                    <li key={index}>{animal.vrsta} {animal.ime} {animal.datumRodjenja}</li>
-                ))}
-            </ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th width='150px'>Vrsta</th>
+                        <th width='150px'>Ime</th>
+                        <th width='150px'>Datum rodjenja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {animals.map((animal, index) => (
+                        <tr key={index}>
+                            <td>{animal.vrsta}</td>
+                            <td>{animal.ime}</td>
+                            <td>{animal.datumRodjenja.toLocaleDateString()}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 }
