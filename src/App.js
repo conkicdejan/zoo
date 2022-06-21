@@ -50,6 +50,17 @@ function App() {
     setSektori("");
   };
 
+  const handleCheckAnimals = (index) => {
+    const animalsInSector = animals.filter(
+      ({ sektor }) => sektor === sektoriLista[index]
+    );
+    alert(
+      animalsInSector.map(({ vrsta, ime, datumRodjenja }) => {
+        return `${vrsta} ${ime} ${dateToString(datumRodjenja)} \n`;
+      })
+    );
+  };
+
   return (
     <div>
       <form onSubmit={addAnimal}>
@@ -124,6 +135,27 @@ function App() {
               <td className="action-buttons">
                 <button onClick={() => handleRemove(index)}>Remove</button>
                 <button onClick={() => handleMove(index)}>Move to top</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <th width="150px">Ime sektora</th>
+            <th width="150px">Akcije</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sektoriLista.map((sektor, index) => (
+            <tr key={index}>
+              <td>{sektor}</td>
+              <td className="action-buttons">
+                <button onClick={() => handleCheckAnimals(index)}>
+                  Check animals
+                </button>
               </td>
             </tr>
           ))}
